@@ -31,7 +31,7 @@ def itemsToAdd():
         add_buttons = wait.until(EC.presence_of_all_elements_located((By.XPATH, "//button[@class='countCta add ']")))
 
 
-        count = 5  # I am adding first 5 food items for testing to cart & display the discount price
+        count = 5  # I am adding first 5 food items for testing to cart & display the discount price & other extra details for better understanding
 
         while(count > 0 ):
 
@@ -40,8 +40,7 @@ def itemsToAdd():
                 if curbutton is not None:
                     curbutton.click()
 
-                    driver.implicitly_wait(2)
-                    item_add_button = wait.until(EC.presence_of_element_located((By.XPATH, "//button[@class='addCTA']")))
+                    item_add_button = wait.until(EC.visibility_of_element_located((By.XPATH, "//button[@class='addCTA']")))
                     item_add_button.click()
 
                   
@@ -55,8 +54,7 @@ def itemsToAdd():
 
         # Now we have added 5 items to cart -- we need to get the discount price & other addtional details I added
 
-        # driver.implicitly_wait(5)
-
+        driver.implicitly_wait(5)
         actual_price = wait.until(EC.visibility_of_element_located((By.XPATH, "//span[@class='highPrice']")))
         price_after_discount = wait.until(EC.visibility_of_element_located((By.XPATH, "//span[@class='finalPrice']")))
         total_items_added = wait.until(EC.visibility_of_element_located((By.XPATH, "//span[@class='cartItemCount']")))
@@ -89,17 +87,7 @@ def itemsToAdd():
 
 
 
-
-    
-
-
-
 if __name__ == "__main__":
-    
-
-    # I am making a list of food that you can query for to add to cart -- this is for testing purposes
-    # I am adding first 5 food items to cart & display the discount price 
-
     
     itemsToAdd()
     print('--------')
