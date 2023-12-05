@@ -1,18 +1,71 @@
 import csv
+import queue
 import random
+import threading
+import pandas as pd
 import requests
 from bs4 import BeautifulSoup
-from Proxy_List_Scrapper import Scrapper, Proxy, ScrapperException
-import requests
-import queue
-import threading
+
+base_url = 'https://www.mygreatlearning.com/data-science/free-courses?p='
+suffix = '#subject-courses-section'
+
+def scrape_data(url, all_names, all_ratings, all_reviews):
+    try:
+
+        response = requests.get(url,proxies={'https': get_proxy() ,'http' : get_proxy()}, timeout=5)
+        soup = BeautifulSoup(response.text, 'html.parser')
+
+        ratings = soup.find_all('span', class_='course-ratings-label')
+        reviews = soup.find_all('span', class_='rating-count-label')
+        names = soup.find_all('h2', class_='course-name')
+
+        for cur in ratings:
+            all_ratings.append(cur.text)
+
+        for rev in reviews:
+            all_reviews.append(rev.text)
+
+        
+        for n in names:
+            all_names.append(n.text.strip())
+
+    except Exception as e:
+        print(f"Error in scraping data: {e}")
+
+
+
+
+
+## This method is used to automate the process of and I scraped all 9 pages here
+
+def automate(base_url, suffix, all_names, all_ratings, all_reviews):
+    print('Scraping data from the website...')
+    total_pages = 11
+
+    for i in range(1, total_pages + 1):
+        url = base_url + str(i) + suffix
+        print(f'Getting data from {url}')
+        scrape_data(url, all_names, all_ratings, all_reviews)
+
+        
+
+
+# Generating csv file for final data
+def make_csv(all_names, all_ratings, all_reviews):
+    df = pd.DataFrame(list(zip(all_names, all_ratings, all_reviews)),
+                      columns=["Name", "Rating", "Reviews"])
+    
+    print(df.head(10))
+    df.to_csv('all_data.csv', index=False)
+
+
 
 q = queue.Queue()
 valid_proxies = []
 
 
 
-with open('proxies.txt', 'r') as f:
+with open('proxyscrape_premium_http_proxies.txt', 'r') as f:
     
      proxies = f.read().split('\n')
      for proxy in proxies:
@@ -47,42 +100,6 @@ for i in range(10):
      t.start()
 
 
-
-def scrape_data(url, name, rating, reviews, total_duration):
-    try:
-
-        cur_proxy = get_proxy() 
-        response = requests.get(url, proxies={'https': cur_proxy, 'http': cur_proxy}, timeout=15)
-        print(f'using proxy {cur_proxy}')
-        if response.status_code  == 200:
-            soup = BeautifulSoup(response.text, 'html.parser')
-
-            ratings = soup.find_all('span', class_ = 'course-ratings-label')
-            print(ratings)
-            reviews = soup.find_all('span', class_ = 'course-rating-count')
-            durations = soup.find_all('div', class_ =  'course-info')
-            names = soup.find_all('h4', class_ = 'course-name')
-
-            for cur in ratings:
-                rating.append(cur.text)
-
-            for rev in reviews:
-                reviews.append(rev.text)
-
-            for dur in durations:
-                total_duration.append(dur.text)
-
-            for n in names:
-                name.append(n.text)
-        else:
-
-            print(f"Error in scraping data: {response.status_code}")
-
-    except Exception as e:
-        print(f"Error in scraping data: {e}")
-
-
-
 def collect_valid_ips():
     valid_ips = check_proxy()
     return valid_ips
@@ -93,43 +110,21 @@ def get_proxy():
     if valid_ips:
         return random.choice(valid_ips)
     else:
-        print("No proxies available.")
+        #print("No proxies available.")
         return None
 
 
-def automate(base_url, suffix, name, rating, reviews, total_duration):
-    print('Scraping data from the website...')
-    total_pages = 9
-
-    for i in range(1, total_pages + 1):
-        url = base_url + str(i) + suffix
-        print(f'Getting data from {url}')
-        scrape_data(url, name, rating, reviews, total_duration)
 
 
-def make_csv(file_name, headers, *lists):
-    csv_filename = file_name + ".csv"
-    transposed_lists = list(zip(*lists))
-
-    with open(csv_filename, mode='w', newline='') as csv_file:
-        writer = csv.writer(csv_file)
-        writer.writerow(headers)
-        for row in transposed_lists:
-            writer.writerow(row)
-
-    print(f"CSV file '{csv_filename}' has been created.")
 
 
+# main func
 if __name__ == "__main__":
-    base_url = 'https://www.mygreatlearning.com/data-science/free-courses?p='
-    suffix = '#subject-courses-section'
-    name = []
-    rating = []
-    reviews = []
-    total_duration = []
-
-    automate(base_url, suffix, name, rating, reviews, total_duration)
-    make_csv("output", ["Name", "Rating", "Reviews", "Total Duration"], name, rating, reviews, total_duration)
-
+    
+    all_names = []
+    all_ratings = []
+    all_reviews = []
+    automate(base_url, suffix, all_names, all_ratings, all_reviews)
+    make_csv(all_names, all_ratings, all_reviews)
 
 
