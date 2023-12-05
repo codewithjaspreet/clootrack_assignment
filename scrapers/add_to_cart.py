@@ -44,8 +44,7 @@ def itemsToAdd():
                     item_add_button = wait.until(EC.presence_of_element_located((By.XPATH, "//button[@class='addCTA']")))
                     item_add_button.click()
 
-                    print(f'Added {count} items to cart')
-
+                  
 
                     count -= 1
 
@@ -54,31 +53,30 @@ def itemsToAdd():
                         break
         
 
-        # Now we have added 5 items to cart -- we need to get the discount price
+        # Now we have added 5 items to cart -- we need to get the discount price & other addtional details I added
 
-        print("Yaha tk agya code")
         # driver.implicitly_wait(5)
 
         actual_price = wait.until(EC.visibility_of_element_located((By.XPATH, "//span[@class='highPrice']")))
-        discount_price = wait.until(EC.visibility_of_element_located((By.XPATH, "//span[@class='finalPrice']")))
+        price_after_discount = wait.until(EC.visibility_of_element_located((By.XPATH, "//span[@class='finalPrice']")))
         total_items_added = wait.until(EC.visibility_of_element_located((By.XPATH, "//span[@class='cartItemCount']")))
+        total_savings = wait.until(EC.visibility_of_element_located((By.XPATH, "//span[@class='savingPrice']")))
 
-        total_savings = {actual_price.text} - {discount_price.text}
 
-        print("code reached till calculations")
+       # CHECK CONSOLE FOR CALCULATED DATA -- I am printing the data to console 
 
         if actual_price is not None:
             print(f'Your total actual price is {actual_price.text}')
 
-        if discount_price is not None:
-         print(f'Your total discount price is {discount_price.text}')   ### This is the discount price
+        if price_after_discount is not None:
+         print(f'Your total price to pay after discount is {price_after_discount.text}')   ### This is the discount price
 
 
         if total_items_added is not None:
              print(f'You have added {total_items_added.text} items to cart')
 
         if total_savings is not None:
-            print (f'You have saved ₹{total_savings}')
+            print (f'You have saved {total_savings.text}')
     
 
     
@@ -106,6 +104,10 @@ if __name__ == "__main__":
     itemsToAdd()
     print('--------')
     print('\n')
+
+
+    while True:
+        pass
 
    # print('Done Scraping Data -- find the csv file in the same directory :)')
     
