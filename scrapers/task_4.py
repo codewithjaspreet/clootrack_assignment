@@ -1,5 +1,7 @@
 # Multipage scraping from data science -  greatlearning.com
 
+# Complete Assignment repo -->  https://github.com/codewithjaspreet/clootrack_assignment
+
 import csv
 import queue
 import random
