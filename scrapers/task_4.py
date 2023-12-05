@@ -1,3 +1,5 @@
+# Multipage scraping from data science -  greatlearning.com
+
 import csv
 import queue
 import random
@@ -5,14 +7,24 @@ import threading
 import pandas as pd
 import requests
 from bs4 import BeautifulSoup
+import queue
+import random
+import threading
+import requests
+q = queue.Queue()
+valid_proxies = []
 
-base_url = 'https://www.mygreatlearning.com/data-science/free-courses?p='
-suffix = '#subject-courses-section'
+
+
+
+
 
 def scrape_data(url, all_names, all_ratings, all_reviews):
     try:
 
-        response = requests.get(url,proxies={'https': get_proxy() ,'http' : get_proxy()}, timeout=5)
+        random_proxy = get_proxy()
+
+        response = requests.get(url,proxies={'https':random_proxy ,'http' : random_proxy}, timeout=5)
         soup = BeautifulSoup(response.text, 'html.parser')
 
         ratings = soup.find_all('span', class_='course-ratings-label')
@@ -36,10 +48,14 @@ def scrape_data(url, all_names, all_ratings, all_reviews):
 
 
 
-## This method is used to automate the process of and I scraped all 9 pages here
-
+## This method is used to automate the process of and I scraped all 11 pages here
 def automate(base_url, suffix, all_names, all_ratings, all_reviews):
-    print('Scraping data from the website...')
+    print('Scraping data from the website...Hold on It takes a while')
+    print('\n')
+    print('From the list of free proxy list - making a list of valid proxies')
+    print('\n')
+    print('Finding Valid proxies...')
+    print('\n')
     total_pages = 11
 
     for i in range(1, total_pages + 1):
@@ -60,11 +76,8 @@ def make_csv(all_names, all_ratings, all_reviews):
 
 
 
-q = queue.Queue()
-valid_proxies = []
 
-
-
+# free - trail 100 proxies list from proxyscrape.com
 with open('proxyscrape_premium_http_proxies.txt', 'r') as f:
     
      proxies = f.read().split('\n')
@@ -75,7 +88,6 @@ with open('proxyscrape_premium_http_proxies.txt', 'r') as f:
 
 def check_proxy():
      
-     global q
      while not q.empty():
           
           cur_proxy = q.get()
@@ -89,6 +101,7 @@ def check_proxy():
                 valid_proxies.append(cur_proxy)
 
           except Exception as e:
+                
                 # print(f'Proxy {cur_proxy} is invalid')
                 continue
           
@@ -106,14 +119,12 @@ def collect_valid_ips():
 
 
 def get_proxy():
-    valid_ips = collect_valid_ips()
-    if valid_ips:
-        return random.choice(valid_ips)
+    all_valid_ips = collect_valid_ips()
+    if all_valid_ips:
+        return random.choice(all_valid_ips)
     else:
         #print("No proxies available.")
         return None
-
-
 
 
 
@@ -124,6 +135,10 @@ if __name__ == "__main__":
     all_names = []
     all_ratings = []
     all_reviews = []
+
+    base_url = 'https://www.mygreatlearning.com/data-science/free-courses?p='
+    suffix = '#subject-courses-section'
+
     automate(base_url, suffix, all_names, all_ratings, all_reviews)
     make_csv(all_names, all_ratings, all_reviews)
 
