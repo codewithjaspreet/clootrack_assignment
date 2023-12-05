@@ -31,7 +31,7 @@ def itemsToAdd():
         add_buttons = wait.until(EC.presence_of_all_elements_located((By.XPATH, "//button[@class='countCta add ']")))
 
 
-        count = 5  # I am adding first 5 food items for testing to cart & display the discount price & other extra details for better understanding
+        count = 3  # I am adding first 3 food items for testing to cart & display the discount price & other extra details for better understanding
 
         while(count > 0 ):
 
@@ -40,8 +40,17 @@ def itemsToAdd():
                 if curbutton is not None:
                     curbutton.click()
 
-                    item_add_button = wait.until(EC.visibility_of_element_located((By.XPATH, "//button[@class='addCTA']")))
+                    driver.implicitly_wait(10)
+
+                    item_add_button = WebDriverWait(driver,5).until(
+
+                        EC.visibility_of_element_located((By.XPATH, "//button[@class='addCTA']"))
+                    )
+
+                   ## item_add_button = wait.until(EC.presence_of_element_located((By.XPATH, "//button[@class='addCTA']")))
+                                        
                     item_add_button.click()
+                    print('Item added to cart')
 
                   
 
@@ -64,7 +73,7 @@ def itemsToAdd():
        # CHECK CONSOLE FOR CALCULATED DATA -- I am printing the data to console 
 
         if actual_price is not None:
-            print(f'Your total actual price is {actual_price.text}')
+            print(f'Your total actual price is {actual_price.text} ')
 
         if price_after_discount is not None:
          print(f'Your total price to pay after discount is {price_after_discount.text}')   ### This is the discount price
@@ -75,12 +84,27 @@ def itemsToAdd():
 
         if total_savings is not None:
             print (f'You have saved {total_savings.text}')
-    
+
+        data = {
+
+            'Actual Price': [actual_price.text],
+            'Discounted Price': [price_after_discount.text],
+            'Items Added': [total_items_added.text.split(' ')[0]],
+            'Savings': [total_savings.text]
+        }
+
+        df = pd.DataFrame(data)
+
+        df.to_csv('discount_&_other_details.csv', index=False)
+
+        print('Data has been saved to csv file in the same directory')
+
+       
 
     
 
     except Exception as e:
-        print(f'Error: {e}')
+        print(f'Error: {e.with_traceback}')
         import traceback
         traceback.print_exc()
         driver.quit()
