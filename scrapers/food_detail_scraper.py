@@ -26,12 +26,32 @@ def get_food_data():
     try:
         driver.get('https://magicpin.in/New-Delhi/Paharganj/Restaurant/Eatfit/store/61a193/delivery/')
 
-        food_types = ['Kulcha Burger', 'Chinese Fried Rice & Noodle Bowl', '3 Layer Rice Bowl', 'Indian Thalis', 'Breakfast And Snacks', 'Desserts & Juices']
+
        
         # Added explicit wait for the page to load completely
         wait = WebDriverWait(driver, timeout=10)
 
-        wait.until(EC.presence_of_element_located((By.XPATH, "//header[@class='subListingsHeader']//p"))).click()
+        all_food_avaliable = wait.until(EC.presence_of_all_elements_located((By.XPATH, "//h4[@class='categoryHeading']")))
+
+        food_types = [curfoodtype.text for curfoodtype in all_food_avaliable]
+
+        print(f'Avaliable food types are {food_types}')
+
+        single_dropdown  = wait.until(EC.presence_of_element_located((By.XPATH, "//header[@class='subListingsHeader']//p")))
+
+        all_dropdowns = wait.until(EC.presence_of_all_elements_located((By.XPATH, "//header[@class='subListingsHeader']//p")))
+
+        
+        # Clicking on the dropdown to get all the food types
+        if single_dropdown is not None:
+            single_dropdown.click()
+
+        for curdropdown in all_dropdowns:
+
+            if curdropdown is not None:
+                curdropdown.click()
+        
+
         
 
         for curfoodtype in food_types:
@@ -79,6 +99,9 @@ if __name__ == "__main__":
     get_food_data()
     make_csv(total_food_names, total_food_prices)
     # Quit the WebDriver
+    print('--------')
+    print('\n')
+
     print('Done Scraping Data -- find the csv file in the same directory :)')
     
     while True:

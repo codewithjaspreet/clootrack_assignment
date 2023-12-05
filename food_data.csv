@@ -1,26 +1,101 @@
 Food Name,Food Price
+Butter Paneer Kulcha Burger,₹249
 Peri-Peri Paneer Kulcha Burger,₹308
 Spicy Dilli Kulcha Burger,₹199
 Butter Chicken Kulcha Burger,₹259
+Chicken Keema Kulcha Burger,₹259
 Veg Manchurian Gravy,₹198
 Hakka Noodles (500g),₹280
+Chilli Garlic Paneer,₹260
 Chicken Manchurian Gravy,₹281
+Chilli Garlic Paneer Fried Rice Bowl,₹288
+Chilli Garlic Paneer Hakka Noodles Bowl,₹319
+Chilli Garlic Chicken Hakka Noodles Bowl,₹348
+Chilli Garlic Chicken Fried Rice Bowl,₹308
+"Kadhai Paneer, Soya Masala Sabzi & Jeera Pulao",₹259
+"Yellow Dal Tadka, Bhindi Chana & Jeera Pulao",₹229
+"Ghar Ke Rajma, Aloo Gobhi & Jeera Pulao",₹239
+"Butter Paneer, Aloo Gobhi & Jeera Pulao",₹268
+"Lasooni Methi Paneer, Soya Masala Sabzi & Jeera Pulao",₹259
+"Yellow Dal Tadka, Soya Masala Sabzi & Jeera Pulao",₹229
+"Kadhai Paneer, Bhindi Chana & Jeera Pulao",₹268
+"Dal Tadka, Bhindi Chana & Millet Pulao",₹239
 "Lasooni Methi Paneer, Soya Matar & Millet Pulao",₹258
 "Chole, Bhindi Chana & Millet Pulao",₹228
 "Palak Paneer, Soya Matar & Millet Pulao",₹267
 "Butter Paneer, Bhindi Chana & Millet Pulao",₹268
+"Kadhai Chicken, Soya Masala Sabzi & Jeera Pulao",₹288
+"Butter Chicken, Aloo Gobhi & Jeera Pulao",₹288
+"Lasooni Methi Chicken, Soya Masala Sabzi & Jeera Pulao",₹279
+"Lasooni Methi Chicken, Bhindi Chana & Jeera Pulao",₹279
+"Kadhai Chicken, Bhindi Chana & Jeera Pulao",₹288
 "Butter Chicken, Bhindi Chana & Millet Pulao",₹288
 "Palak Chicken, Soya Matar & Millet Pulao",₹287
+Fruit Pop Oatmeal,₹209
+Chocolate Fruit Pop,₹229
+Mango Fruit Pop,₹219
+Beetroot Curd Rice Fruit Pop,₹218
+Kadhai Paneer Deluxe Thali,₹399
+Palak Paneer Deluxe Thali,₹398
+Butter Paneer Deluxe Thali,₹407
 Palak Paneer Fit Thali,₹318
+Lasooni Methi Paneer Fit Thali,₹307
 Dal Makhani Fit Thali,₹278
 Butter Paneer Fit Thali,₹327
+Kadhai Paneer Fit Thali,₹318
+Yellow Dal Tadka Fit Thali,₹258
+Lasooni Methi Chicken Fit Thali,₹327
 Palak Chicken Fit Thali,₹338
+Kadhai Chicken Fit Thali,₹338
 Butter Chicken Fit Thali,₹347
+"Yellow Dal Tadka, Bhindi Chana, Paratha Thali",₹228
+"Lasooni Methi Paneer, Aloo Gobhi & Paratha Thali",₹268
+"Kadhai Paneer, Soya Masala Sabzi, Paratha Thali",₹279
+"Chole, Aloo Gobhi, Paratha Thali",₹259
+"Palak Paneer, Dal Makhani, Parathas Thali",₹277
+"Butter Paneer, Dal Makhani, Paratha Thali",₹279
+"Kadhai Paneer, Bhindi Chana, Paratha Thali",₹297
+"Kadhai Paneer, Yellow Dal Tadka, Paratha Thali",₹298
+"Veg Keema, Yellow Dal Tadka, Paratha Thali",₹259
+"Sarson Ka Saag, 3 Paratha Meal",₹249
+"Matar Paneer, Dal Makhani, Paratha Thali",₹297
+"Kadhai Chicken, Soya Masala Sabzi, Paratha Thali",₹319
+"Lasooni Methi Chicken, Yellow Dal Tadka, Paratha Thali",₹299
+"Palak Chicken, Dal Makhani, Parathas Thali",₹287
+"Masala Egg Curry, Yellow Dal Tadka, Paratha Thali",₹249
+"Butter Chicken, Dal Makhani, Paratha Thali",₹347
+Classic Tomato Basil Penne Pasta,₹288
+Creamy Pesto Sauce Penne Pasta,₹299
+Peri Peri Sauce Penne Pasta,₹279
+Poha,₹139
+Poha With Ratlami Sev,₹169
+Fruit Bowl,₹219
 Baked Bhakarwadi (50g),₹59
 Quinoa Bhujia (50g),₹69
 Ragi Chips (50g),₹59
+Chole Kulche,₹199
+Millet Curd Rice,₹180
+Signature Sabudana Khichdi,₹175
+Quinoa Khichdi,₹199
+Sabudana Khichdi,₹167
+Dal Palak Khichdi,₹259
+Whole Wheat Kulcha (2pcs),₹79
+Whole Wheat Parathas (3pcs),₹68
+Jeera Pulao (500g),₹149
+Dal Makhani (420g),₹228
+Butter Paneer (380g),₹328
+Lasooni Methi Paneer (380g),₹299
+Kadhai Paneer (380g),₹278
+Sarson Ka Saag (380g),₹329
+Lasooni Methi Chicken (400g),₹308
+Butter Chicken (400g),₹339
+Kadhai Chicken (400g),₹348
 Badam Kheer,₹79
 Seviya Kheer,₹99
+Mango Pudding,₹139
+Chocolate Nutty Dates Pudding,₹99
+Mango Phirni,₹89
+Millet Sabudana Kheer,₹79
 Panjiri Laddu (500g),₹399
 Badam Kheer (400gm),₹153
 Banana Walnut Cake,₹89
@@ -28,10 +103,13 @@ Chocolate Orange Mousse,₹115
 Date Raisin Cake,₹79
 Chocolate Walnut Brownie,₹79
 Tender Coconut Water,₹59
+Classic Cold Coffee,₹139
 Aam Ka Panna (200ml),₹62
 Mocha Shake,₹99
 Lemonade,₹69
 Mango (200ml),₹89
+Mixed Fruit (200ml),₹89
 Lemonade (200ml),₹75
+Sugarcane (200ml),₹62
 Pomegranate (200ml),₹107
 Orange (200ml),₹107
