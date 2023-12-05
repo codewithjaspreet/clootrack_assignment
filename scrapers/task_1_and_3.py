@@ -89,10 +89,16 @@ def get_food_data():
          print(f'{e} - error occurred while opening the website')
          driver.quit()
 
-    
+
+
+# TASK 3 - Make a csv file with the data + removing duplicates
 def make_csv(food_names, food_prices):
     df = pd.DataFrame(list(zip(food_names, food_prices)), columns=['Food Name', 'Food Price'])
-    df.to_csv('food_data.csv', index=False)
+    total_dups  = df.drop_duplicates()
+    print(len(total_dups))  
+    total_dups.to_csv('food_data.csv', index=False)
+
+
 
 if __name__ == "__main__":
     
