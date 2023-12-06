@@ -15,7 +15,7 @@ To run this project, you need to install the following dependencies:
    pip3 install selenium
 
 
-2. **Selenium:**
+2. **Requests:**
    ```bash
    pip3 install requests
    
